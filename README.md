@@ -1,4 +1,4 @@
-#display_nuc
+# display_nuc
 
 - This is intel_nuc administrated by Ansible.
 - It displays 'suplovani' extracted from https://gjk.cz/o-studiu/rozvrh-a-suplovani/suplovani/.
