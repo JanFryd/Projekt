@@ -1,0 +1,44 @@
+---
+
+- hosts: display_nuc
+  tasks:
+    - name: Enable EPEL
+      package: name=epel-release state=latest
+
+    - name: Create display user
+      user: name=rozvrh
+
+    - name: Install Xorg
+      package: name=xorg-x11-server-Xorg,xorg-x11-xinit state=latest
+
+    - name: Install Openbox
+      package: name=openbox state=latest
+
+    - name: Install Firefox
+      package: name=firefox state=latest
+
+    - name: Allow display user to start Xorg
+      copy: src=Xwrapper.config dest=/etc/X11/Xwrapper.config
+
+    - name: Copy .xinitrc
+      copy: src=xinitrc dest=/home/rozvrh/.xinitrc
+
+    - name: Copy dl_rozvrh.sh
+      copy: src=dl_rozvrh.sh dest=/home/rozvrh/dl_rozvrh.sh mode=0755
+
+    - name: Copy supl_add.html
+      copy: src=supl_add.html dest=/home/rozvrh/supl_add.html
+
+    - name: Copy openbox config
+      block:
+        - file: path=/home/rozvrh/.config/openbox state=directory
+        - copy: src=rc.xml dest=/home/rozvrh/.config/openbox/rc.xml
+
+    - name: Copy rozvrh service
+      copy: src=rozvrh.service dest=/etc/systemd/system/rozvrh.service
+
+    - name: Set boot target to graphical
+      command: systemctl set-default graphical
+
+    - name: Start rozvrh service
+      service: name=rozvrh enabled=yes state=restarted
