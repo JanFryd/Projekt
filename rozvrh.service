@@ -1,0 +1,12 @@
+[Unit]
+Description=Zobrazi rozvrh ve Firefoxu
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/xinit
+User=rozvrh
+Restart=always
+
+[Install]
+WantedBy=graphical.target

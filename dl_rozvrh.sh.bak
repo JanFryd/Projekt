@@ -1,0 +1,46 @@
+#while true; do
+	curl https://gjk.cz/o-studiu/rozvrh-a-suplovani/suplovani/ -o supl_temp.html
+	cat >> supl_temp.html << EOF
+	
+
+	<script>
+
+		var contentElem = document.queryElementById("content-full");
+		for(var child of document.body.children) {
+			document.body.removeChild(child);
+		}
+		document.body.appendChild(contentElem);
+	
+	scroll page up and down
+	var scroll = setInterval(function(){ window.scrollBy(0,10); }, 200);
+	a po dosahnuti scrooldown = max zase jet zpatky nahoru
+
+
+	</script>
+	
+
+
+
+
+
+
+	<style>
+
+
+</style>
+EOF
+	mv supl_temp.html supl.html
+	
+	
+	# Firefox pak nasmerovat na file:///.../supl.html - v /home/rozvrh/.xinitrc prepsat z nastavene stranky na dane umisteni supl.html
+		
+	
+	
+	
+	
+	sleep 1h
+
+
+
+
+done

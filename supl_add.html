@@ -1,0 +1,112 @@
+<script language="JavaScript1.2">
+
+/*
+Advanced window scroller script-
+By JavaScript Kit (http://www.javascriptkit.com/script/cut179.shtml)
+*/
+
+var currentpos=0,alt=1,curpos1=0,curpos2=-1
+function initialize(){
+startit()
+}
+function scrollwindow(){
+if (document.all)
+temp=document.body.scrollTop
+else
+temp=window.pageYOffset
+if (alt==0)
+alt=1
+else
+alt=0
+if (alt==0)
+curpos1=temp
+else
+curpos2=temp
+if (curpos1!=curpos2){
+if (document.all)
+currentpos=document.body.scrollTop+1
+else
+currentpos=window.pageYOffset+1
+window.scroll(0,currentpos)
+}
+else{
+currentpos=0
+window.scroll(0,currentpos)
+}
+}
+function startit(){
+setInterval("scrollwindow()",10)
+}
+window.onload=initialize
+</script>
+
+<script>
+	setTimeout(function() {
+		document.location.reload();
+	}, 1000 * 60 * 60);
+</script>
+
+
+/*
+
+<script>
+
+var supl = document.createElement("div");
+supl.id = "x-suplinfo";
+
+var suplTbl = document.getElementsByClassName("tb_supltrid_3")[0];
+var suplTblRows = suplTbl.querySelectorAll("tr");
+var cls = "";
+for(var row of suplTblRows) {
+	var cols = row.children;
+	if(cols.length != 8) {
+		continue;
+	}
+	if(cols[0].innerText.trim() != "") {
+		cls = cols[0].innerText.trim();
+	}
+	var time = cols[1].innerText;
+	var lesson = cols[2].innerText;
+	var group = cols[3].innerText.trim();
+	var newPlace = cols[4].innerText;
+	var type = cols[5].innerText.trim();
+	var newTeacher = cols[6].innerText;
+	var oldTeacher = cols[7].innerText;
+
+	var outPar = document.createElement("p");
+	if(type == "odpadá") {
+		outPar.innerHTML = 'Třídě <span class="trida">'+cls+'</span> odpadá '+time+' předmět '+lesson;
+		if(group != "") {
+			outPar.innerHTML += ' (skupina '+group+')';
+		}
+	} else if(type == "supluje") {
+		outPar.innerHTML = 'Třídě '+cls+' supluje '+time+' předmět '+lesson+' učitel '+newTeacher;
+	}
+	supl.appendChild(outPar);
+}
+
+while(document.body.childElementCount !== 0) {
+	document.body.removeChild(document.body.children[0]);
+}
+document.body.appendChild(supl);
+
+	setTimeout(function() {
+		document.location.reload();
+	}, 1000 * 60 * 60);
+
+</script>
+
+<style>
+	#x-suplinfo {
+		column-count: 4;
+	}
+
+	#x-suplifo p {
+		font-size: 26pt;
+	}
+
+	.trida {
+		color: red;
+	}
+</style>
+*/
